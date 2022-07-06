@@ -13,6 +13,7 @@ BINARIES_DIR = ./bin
 OBJECT_DIR = ./objs
 SOURCE_DIR = ./src
 LIBRARIES_DIR = ./libs
+HEADERS_DIR = headers
 
 
 EXE = $(BINARIES_DIR)/client 
@@ -28,7 +29,10 @@ CLIENT_HEADERS = ./headers/api.h
 # 	$(CC) $(CFLAGS) $(INCLUDES) -c src/api.c $(LIBS)
 # 	@mv api.o $(OBJ_DIR)/api.o
 
-$(OBJECT_DIR)/api.o: $(SOURCE_DIR)/api.c headers/api.h
+API_OBJ := $(patsubst $(SOURCE_DIR)/api.c, $(OBJECT_DIR)/api.o, $(SOURCE_DIR))
+
+
+$(OBJECT_DIR)/api.o: $(SOURCE_DIR)/api.c $(HEADERS_DIR)/api.h
 	$(CC) $(INCLUDES) $(CFLAGS) -c src/api.c -o api.o $(LDLIBS)
 
 $(OBJECT_DIR)/client.o: $(SOURCE_DIR)/client.c $(CLIENT_HEADERS) $(CLIENT_LIBRARIES)

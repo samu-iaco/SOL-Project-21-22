@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/samuele/Progetto/SOL-Project-21-22'
+gcc -I ./headers -g -std=c99 -Wall -c src/api.c -o api.o -lpthread 
+gcc -shared -o ./libs/libapi.so objs/api.o	
+gcc -g -std=c99 -Wall -c src/client.c  -lpthread 
+gcc -I ./headers -g -std=c99 -Wall client.c -o client -Wl,-rpath,./libs -L ./libs  
+gcc -I ./headers -g -std=c99 -Wall client.c -o client -Wl,-rpath,./libs -L ./libs  
+make: Leaving directory '/home/samuele/Progetto/SOL-Project-21-22'
+ 

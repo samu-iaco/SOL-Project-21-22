@@ -1,0 +1,465 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed Jul  6 12:26:33 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+PAPERSIZE = a4
+# environment
+DESKTOP_SESSION = ubuntu
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_SESSION_CLASS = user
+# environment
+SNAP_COMMON = /var/snap/code/common
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
+# makefile (from 'makefile', line 13)
+OBJECT_DIR = ./objs
+# makefile (from 'makefile', line 8)
+INCLUDES = -I ./headers
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/samuele/Progetto/SOL-Project-21-22
+# makefile
+SHELL = /bin/sh
+# environment
+SNAP_DATA = /var/snap/code/99
+# makefile (from 'makefile', line 16)
+HEADERS_DIR = headers
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+JOURNAL_STREAM = 8:61125
+# makefile (from 'makefile', line 4)
+CFLAGS = -g -std=c99 -Wall
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+SNAP_ARCH = amd64
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+USERNAME = samuele
+# makefile (from 'makefile', line 5)
+CXXFLAGS = -DDEBUG
+# environment
+MAKELEVEL := 0
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+_ = /snap/code/99/usr/share/code/code
+# environment
+MANAGERPID = 1536
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+LC_NAME = it_IT.UTF-8
+# environment
+VSCODE_CWD = /home/samuele
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/99/usr/share/glib-2.0/schemas
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/1749,unix/ubuntu:/tmp/.ICE-unix/1749
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/samuele/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+SNAP = /snap/code/99
+# makefile (from 'makefile', line 32)
+API_OBJ :=  ./src
+# environment
+SNAP_VERSION = 30d9c6cd
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+DISABLE_WAYLAND = 1
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+INVOCATION_ID = d81b5362b0d740198b850934b2392258
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/99/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# makefile (from 'makefile', line 7)
+LDLIBS = -lpthread 
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# makefile (from 'makefile', line 23)
+CLIENT_LIBRARIES = $(LIBRARIES_DIR)/libapi.so
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3401
+# automatic
+%F = $(notdir $%)
+# makefile (from 'makefile', line 14)
+SOURCE_DIR = ./src
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+PWD = /home/samuele/Progetto/SOL-Project-21-22
+# default
+.LOADED := 
+# makefile (from 'makefile', line 24)
+CLIENT_OBJECTS = $(OBJECT_DIR)/client.o $(OBJECT_DIR)/api.o
+# environment
+SSH_AGENT_PID = 1714
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/samuele
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/samuele/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+# environment
+LOGNAME = samuele
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# environment
+SNAP_CONTEXT = 1lcX1dDjwDfJZFZMJDU4dbKxchoowZviMdstH3s2Xt2nzhI99Jrq
+# automatic
++F = $(notdir $+)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SNAP_USER_COMMON = /home/samuele/snap/code/common
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+LC_TIME = it_IT.UTF-8
+# environment
+SNAP_REAL_HOME = /home/samuele
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SNAP_USER_DATA = /home/samuele/snap/code/99
+# environment
+SHLVL = 0
+# makefile (from 'makefile', line 3)
+CC = gcc
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-384db734-d0f5-4551-ad7b-d6493d1a366a.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = samuele
+# environment
+SNAP_REVISION = 99
+# environment
+LC_MONETARY = it_IT.UTF-8
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# makefile (from 'makefile', line 15)
+LIBRARIES_DIR = ./libs
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = it_IT.UTF-8
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-69eb4386-1.68.1-main.sock
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# environment
+LC_PAPER = it_IT.UTF-8
+# makefile (from 'makefile', line 25)
+CLIENT_HEADERS = ./headers/api.h
+# environment
+LC_IDENTIFICATION = it_IT.UTF-8
+# environment
+QT_ACCESSIBILITY = 1
+# default
+MAKEFILES := 
+# environment
+SNAP_COOKIE = 1lcX1dDjwDfJZFZMJDU4dbKxchoowZviMdstH3s2Xt2nzhI99Jrq
+# environment
+LC_NUMERIC = it_IT.UTF-8
+# automatic
+<F = $(notdir $<)
+# environment
+LC_MEASUREMENT = it_IT.UTF-8
+# environment
+SNAP_NAME = code
+# environment
+LC_ALL = C
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+ 
+# environment
+SNAP_REEXEC = 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# default
+.RECIPEPREFIX := 
+# makefile (from 'makefile', line 12)
+BINARIES_DIR = ./bin 
+# makefile (from 'makefile', line 19)
+EXE = $(BINARIES_DIR)/client 
+# environment
+LC_ADDRESS = it_IT.UTF-8
+# environment
+LANG = C
+# environment
+VSCODE_PID = 3447
+# variable set hash-table stats:
+# Load=145/1024=14%, Rehash=0, Collisions=37/200=18%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2053, inode 1049222): 12 files, no impossibilities.
+
+# 12 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+all: bin /client
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+
+bin: objs/client.o objs/api.o -lpthread libs/libapi.so
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-06 12:22:37.778748744
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+#  recipe to execute (from 'makefile', line 43):
+	$(CC) $(INCLUDES) $(CFLAGS) client.c -o client -Wl,-rpath,./libs -L ./libs  
+
+# Not a target:
+headers/api.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-06 09:47:46.887165727
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/client.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-06 12:25:29.424062446
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libs/libapi.so: objs/api.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+#  recipe to execute (from 'makefile', line 46):
+	$(CC) -shared -o $(LIBRARIES_DIR)/libapi.so $^	
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-06 10:24:08.543342791
+#  File has been updated.
+#  Successfully updated.
+
+/client: objs/client.o objs/api.o -lpthread libs/libapi.so
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 43):
+	$(CC) $(INCLUDES) $(CFLAGS) client.c -o client -Wl,-rpath,./libs -L ./libs  
+
+objs/api.o: src/api.c headers/api.h
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := objs/api.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := src/api.c headers/api.h
+# automatic
+# | := 
+# automatic
+# < := src/api.c
+# automatic
+# ^ := src/api.c headers/api.h
+# automatic
+# ? := src/api.c headers/api.h
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  recipe to execute (from 'makefile', line 36):
+	$(CC) $(INCLUDES) $(CFLAGS) -c src/api.c -o api.o $(LDLIBS)
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+-lpthread:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 49):
+	-rm $(TARGETS) $(EXE) *~ core 
+
+objs/client.o: src/client.c headers/api.h libs/libapi.so
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+#  recipe to execute (from 'makefile', line 39):
+	$(CC) $(CFLAGS) -c src/client.c  $(LDLIBS)
+
+# Not a target:
+src/api.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-06 12:12:26.644317597
+#  File has been updated.
+#  Successfully updated.
+
+# files hash-table stats:
+# Load=14/1024=1%, Rehash=0, Collisions=0/41=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 26 / storage = 245 B / avg = 9 B
+# current buf: size = 8162 B / used = 245 B / count = 26 / avg = 9 B
+
+# strcache performance: lookups = 48 / hit rate = 45%
+# hash-table stats:
+# Load=26/8192=0%, Rehash=0, Collisions=1/48=2%
+# Finished Make data base on Wed Jul  6 12:26:33 2022
+
+ 

@@ -1,4 +1,6 @@
-#include <stdio.h>
+#define _POSIX_C_SOURCE 200809L
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,6 +12,7 @@
 #include <sys/un.h>
 #include <sys/select.h>
 
+
 #include <api.h>
 #include <utils.h>
 
@@ -17,14 +20,10 @@
 
 int main(int argc, char *argv[])
 {
-    struct sockaddr_un serv_addr; /* ind AF_UNIX */
-    strcpy(serv_addr.sun_path, SOCKNAME);
-    memset(&serv_addr, '0', sizeof(serv_addr));
-    serv_addr.sun_family = AF_UNIX;
-
-    int sfd;
-    SYSCALL(sfd,socket(AF_UNIX,SOCK_STREAM,0),"Error opening client socket");
-
+    int err;
+    char *buf;
+    printf("ok\n");
+    SYSCALL(err,write(1,&buf,2),"errore write");
     printf("in attesa del server...\n");
     return 0;
 }

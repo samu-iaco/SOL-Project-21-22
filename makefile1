@@ -1,0 +1,31 @@
+CC = gcc
+CFLAGS += -g -std=c99 -Wall
+LDLIBS = -lpthread 
+INCLUDES = -I ./headers
+
+
+OBJDIR = obj
+SRCDIR = src
+BINDIR = bin
+OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o
+# OBJS += $(OBJDIR)/api.o
+
+$(info objs: $(OBJS))
+
+TARGETS= client
+all: $(TARGETS)
+
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+$(BINDIR)/%: $(BINDIR)/%.o
+	@mkdir -p $(BINDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+client: $(OBJS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) -o $(BINDIR)/client $(OBJS)
+
+
