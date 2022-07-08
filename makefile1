@@ -7,7 +7,7 @@ INCLUDES = -I ./headers
 OBJDIR = obj
 SRCDIR = src
 BINDIR = bin
-OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o
+OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o $(OBJDIR)/utils.o
 # OBJS += $(OBJDIR)/api.o
 
 $(info objs: $(OBJS))

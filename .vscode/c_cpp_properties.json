@@ -3,10 +3,12 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "/home/samuele/Progetto/SOL-Project-21-22/headers"
+                "/home/samuele/Progetto/SOL-Project-21-22/headers",
+                "${workspaceFolder}/**"
             ],
-            "defines": [],
+            "defines": [
+                ""
+            ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",

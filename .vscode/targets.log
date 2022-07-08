@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Jul  6 12:26:33 2022
+# Make data base, printed on Wed Jul  6 16:27:59 2022
 
 # Variables
 
@@ -57,7 +57,7 @@ HEADERS_DIR = headers
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:61125
+JOURNAL_STREAM = 8:61766
 # makefile (from 'makefile', line 4)
 CFLAGS = -g -std=c99 -Wall
 # environment
@@ -87,7 +87,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/99/usr/share/code/code
 # environment
-MANAGERPID = 1536
+MANAGERPID = 1512
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -103,7 +103,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/1749,unix/ubuntu:/tmp/.ICE-unix/1749
+SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/1722,unix/ubuntu:/tmp/.ICE-unix/1722
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -123,7 +123,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = d81b5362b0d740198b850934b2392258
+INVOCATION_ID = 8ddcee5f004245fcbba22ef2e1a768f0
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/99/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # makefile (from 'makefile', line 7)
@@ -139,7 +139,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3401
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7431
 # automatic
 %F = $(notdir $%)
 # makefile (from 'makefile', line 14)
@@ -157,7 +157,7 @@ PWD = /home/samuele/Progetto/SOL-Project-21-22
 # makefile (from 'makefile', line 24)
 CLIENT_OBJECTS = $(OBJECT_DIR)/client.o $(OBJECT_DIR)/api.o
 # environment
-SSH_AGENT_PID = 1714
+SSH_AGENT_PID = 1687
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -211,7 +211,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-384db734-d0f5-4551-ad7b-d6493d1a366a.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-14961db6-706e-4e13-8ec7-15e961324a8f.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -300,7 +300,7 @@ LC_ADDRESS = it_IT.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3447
+VSCODE_PID = 7480
 # variable set hash-table stats:
 # Load=145/1024=14%, Rehash=0, Collisions=37/200=18%
 
@@ -310,9 +310,9 @@ VSCODE_PID = 3447
 
 # Directories
 
-# . (device 2053, inode 1049222): 12 files, no impossibilities.
+# . (device 2053, inode 1049222): 13 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -331,7 +331,7 @@ all: bin /client
 
 bin: objs/client.o objs/api.o -lpthread libs/libapi.so
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-06 12:22:37.778748744
+#  Last modified 2022-07-06 16:21:02.678940101
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -342,14 +342,14 @@ bin: objs/client.o objs/api.o -lpthread libs/libapi.so
 # Not a target:
 headers/api.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-06 09:47:46.887165727
+#  Last modified 2022-07-06 16:09:39.447265
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/client.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-06 12:25:29.424062446
+#  Last modified 2022-07-06 16:27:43.968462001
 #  File has been updated.
 #  Successfully updated.
 
@@ -442,7 +442,7 @@ objs/client.o: src/client.c headers/api.h libs/libapi.so
 # Not a target:
 src/api.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-06 12:12:26.644317597
+#  Last modified 2022-07-06 16:25:50.146159001
 #  File has been updated.
 #  Successfully updated.
 
@@ -454,12 +454,12 @@ src/api.c:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 245 B / avg = 9 B
-# current buf: size = 8162 B / used = 245 B / count = 26 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 251 B / avg = 9 B
+# current buf: size = 8162 B / used = 251 B / count = 27 / avg = 9 B
 
-# strcache performance: lookups = 48 / hit rate = 45%
+# strcache performance: lookups = 49 / hit rate = 44%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=1/48=2%
-# Finished Make data base on Wed Jul  6 12:26:33 2022
+# Load=27/8192=0%, Rehash=0, Collisions=1/49=2%
+# Finished Make data base on Wed Jul  6 16:27:59 2022
 
  

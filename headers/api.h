@@ -9,11 +9,13 @@
  * 
  */
 
-#ifndef api
-#define api
+#ifndef API_H
+#define API_H
 
 #define _POSIX_C_SOURCE 200809L
 #include <sys/time.h>
+
+char* mysock=NULL; //nome del socket a cui connettersi
 
 /**
  * @brief connette al client ad un socket
