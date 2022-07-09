@@ -13,9 +13,7 @@
 
 #include <api.h>
 #include <utils.h>
-#include <queue.h>
 
-#define SOCKNAME "./mysock"
 
 int main(int argc, char *argv[])
 {
@@ -26,22 +24,14 @@ int main(int argc, char *argv[])
     }
 
     node *queue = init_queue(); //coda richieste
+    //int res = parse
 
-
-    int cmd = 0;
-
-    while ((cmd = getopt(argc, argv, "h:f:w:W:d:D:r:R:t:l:u:c:p")) != -1)
-    {
-        switch (cmd)
-        {
-            case 'f':
-            
-                mysock = alloc_strings(strlen(optarg));
-                strcpy(mysock,optarg);
-                //free(mysock);
-            break;
-        }
+    //passo questa coda a una funzione che parsa le richieste
+    if( parsing(argc,argv,queue) == -1 ){
+        perror("parsing");
+        exit(errno);
     }
+
 
 
  

@@ -7,8 +7,8 @@ INCLUDES = -I ./headers
 OBJDIR = obj
 SRCDIR = src
 BINDIR = bin
-OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o $(OBJDIR)/utils.o
-# OBJS += $(OBJDIR)/api.o
+HEADDIR = headers
+OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o $(OBJDIR)/queue.o $(OBJDIR)/utils.o $(OBJDIR)/parse_request.o 
 
 $(info objs: $(OBJS))
 
@@ -16,13 +16,37 @@ TARGETS= client
 all: $(TARGETS)
 
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
+# $(OBJDIR)/%.o: $(SRCDIR)/%.c
+# 	@mkdir -p $(OBJDIR)
+# 	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+
+
+$(OBJDIR)/api.o: $(SRCDIR)/api.c $(HEADDIR)/api.h
 	@mkdir -p $(OBJDIR)
 	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
 
-$(BINDIR)/%: $(BINDIR)/%.o
-	@mkdir -p $(BINDIR)
+$(OBJDIR)/client.o: $(SRCDIR)/client.c $(HEADDIR)/api.h $(HEADDIR)/utils.h
+	@mkdir -p $(OBJDIR)
 	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+$(OBJDIR)/queue.o: $(SRCDIR)/queue.c $(HEADDIR)/queue.h
+	@mkdir -p $(OBJDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+$(OBJDIR)/utils.o: $(SRCDIR)/utils.c $(HEADDIR)/queue.h
+	@mkdir -p $(OBJDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+$(OBJDIR)/parse_request.o: $(SRCDIR)/parse_request.c $(HEADDIR)/api.h $(HEADDIR)/utils.h
+	@mkdir -p $(OBJDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS) 
+
+
+
+# $(BINDIR)/%: $(BINDIR)/%.o
+# 	@mkdir -p $(BINDIR)
+# 	$(CC) $(INCLUDES) -o $@ $< $(CFLAGS) 
 
 client: $(OBJS)
 	@mkdir -p $(BINDIR)

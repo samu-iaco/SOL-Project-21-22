@@ -14,8 +14,10 @@
 typedef struct _node
 {
     char *request;
-    struct node_t* next;
+    struct _node* next;
 }node;
+
+
 
 node* init_queue();
 
