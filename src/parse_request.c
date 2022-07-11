@@ -29,7 +29,7 @@ int parsing(int argc, char *argv[], node *queue)
 
             mysock = alloc_strings(strlen(optarg));
             strcpy(mysock, optarg);
-            //free(mysock);
+            
             break;
         }
     }

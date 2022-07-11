@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
     }
 
     node *queue = init_queue(); //coda richieste
-    //int res = parse
 
     //passo questa coda a una funzione che parsa le richieste
     if( parsing(argc,argv,queue) == -1 ){
@@ -32,9 +31,16 @@ int main(int argc, char *argv[])
         exit(errno);
     }
 
+    /* timespec per timeout connessione client */
+    struct timespec t;
+    t.tv_sec = 5;
+    t.tv_nsec = 0;
 
-
- 
+    if( (openConnection(mysock,1000,t)) == -1 ){
+        perror("CLIENT: impossibile stabilire connessione con il server");
+        printf("\n errno da connessione fallita: %d\n",errno);
+        exit(EXIT_FAILURE);
+    }
 
     return 0;
 }

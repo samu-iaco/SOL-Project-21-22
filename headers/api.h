@@ -32,7 +32,7 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
 //  * @param sockname nome del socket
 //  * @return 0 in caso di successo della chiusura della connessione, -1 altrimenti. errno viene settata
 //  */
-// int closeConnection(const char* sockname);
+int closeConnection(const char* sockname);
 
 // /**
 //  * @brief richiesta di apertura di un file. Modalità di apertura descritta dai flag che vengono

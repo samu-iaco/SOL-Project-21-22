@@ -20,6 +20,13 @@
     }
 
 
+#define NULL_CHECK(str, e) \
+    if (str == NULL)   \
+    {                    \
+        errno = e;       \
+        return -1;       \
+    }
+
 
 
 /**

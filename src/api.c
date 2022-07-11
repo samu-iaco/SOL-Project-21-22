@@ -16,6 +16,7 @@
 
 #include <utils.h>
 #include "api.h"
+#include <connection.h>
 
 
 long timespecdifference(struct timespec start, struct timespec end, struct timespec goal){
@@ -44,10 +45,21 @@ int get_ms(struct timespec ts){
     return ms;
 }
 
+int init_socket(int fd, char* sockname){
+    mySocket clientsock;
+
+    NULL_CHECK(sockname,EINVAL);
+
+    clientsock.fd = fd;
+    clientsock.socket = sockname;
+
+    return 0;
+}
+
 
 
 int openConnection(const char* sockname, int msec, const struct timespec abstime) {
-    int sfd,unused, conn = 0;
+    int sfd=0,unused;
     SYSCALL(sfd,socket(AF_UNIX, SOCK_STREAM, 0),"Error creating socket");
     
     struct sockaddr_un serv_addr; /* ind AF_UNIX */
@@ -70,7 +82,9 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         return -1;
     }
 
-    while( (conn = connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr) == -1 ) && remaining > 0) ){
+    while( (connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr) == -1 ) && remaining > 0) ){
+        printf("CLIENT: impossibile connettersi");
+        
         SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &end),"getting current time");
 
         int msend = get_ms(end);
@@ -85,9 +99,28 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         
         nanosleep(&t,NULL); 
     }
+
+    if(sfd){
+        printf("CLIENT: connessione con il server stabilita\n");
+
+        init_socket(sfd,sockname);
+
+        return sfd;
+    }
     
 
 
-    return conn;
+    return -1;
 
 }    
+
+
+
+int closeConnection(const char* sockname){
+    NULL_CHECK(sockname,EINVAL);
+
+    //implementare il modo di trovare il file descriptor giusto da chiudere 
+
+
+    return 0;
+}
