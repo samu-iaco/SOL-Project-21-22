@@ -16,6 +16,7 @@
 #include <sys/time.h>
 
 extern char* mysock; //nome del socket a cui connettersi
+extern int sfd;
 
 /**
  * @brief connette al client ad un socket

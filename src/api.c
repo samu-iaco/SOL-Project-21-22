@@ -16,8 +16,8 @@
 
 #include <utils.h>
 #include "api.h"
-#include <connection.h>
 
+int sfd = -1; 
 
 long timespecdifference(struct timespec start, struct timespec end, struct timespec goal){
     int diffsec = end.tv_sec - start.tv_sec;
@@ -45,28 +45,23 @@ int get_ms(struct timespec ts){
     return ms;
 }
 
-int init_socket(int fd, char* sockname){
-    mySocket clientsock;
 
-    NULL_CHECK(sockname,EINVAL);
-
-    clientsock.fd = fd;
-    clientsock.socket = sockname;
-
-    return 0;
-}
 
 
 
 int openConnection(const char* sockname, int msec, const struct timespec abstime) {
-    int sfd=0,unused;
-    SYSCALL(sfd,socket(AF_UNIX, SOCK_STREAM, 0),"Error creating socket");
+    if(sfd != -1){
+        errno = EISCONN;
+        return -1;
+    }
+
+    int unused;
+    SYSCALL(sfd,socket(AF_UNIX, SOCK_STREAM, 0),"Error creating socket",errno);
     
     struct sockaddr_un serv_addr; /* ind AF_UNIX */
     strcpy(serv_addr.sun_path, sockname);
     memset(&serv_addr, '0', sizeof(serv_addr));
     serv_addr.sun_family = AF_UNIX;
-    printf("dai grande qui ci arrivi\n");
 
     //tempo tra un tentarivo e l'altro nel caso in cui il server non accetta la connessione
     struct timespec start, end;
@@ -75,7 +70,7 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
     t.tv_nsec = (msec%1000)*1000000;
     int remaining = get_ms(abstime);
     //printf("remaining :%d\n",remaining);    
-    SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &start),"getting start time");
+    SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &start),"getting start time",errno);
     int msstart = get_ms(start);
     if(remaining < 0 || msstart < 0){
         errno = EINVAL;
@@ -85,7 +80,7 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
     while( (connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr) == -1 ) && remaining > 0) ){
         printf("CLIENT: impossibile connettersi");
         
-        SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &end),"getting current time");
+        SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &end),"getting current time",errno);
 
         int msend = get_ms(end);
         if(msend < 0){
@@ -97,15 +92,15 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
 
 
         
-        nanosleep(&t,NULL); 
+        SYSCALL(unused,nanosleep(&t,NULL),"nanosleep",errno); 
     }
 
     if(sfd){
         printf("CLIENT: connessione con il server stabilita\n");
 
-        init_socket(sfd,sockname);
-
-        return sfd;
+        // init_socket(sfd,sockname);
+        mysock = sockname;
+        return 0;
     }
     
 
@@ -119,7 +114,18 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
 int closeConnection(const char* sockname){
     NULL_CHECK(sockname,EINVAL);
 
-    //implementare il modo di trovare il file descriptor giusto da chiudere 
+    if( strcmp(mysock,sockname)!=0 ){ //client non connesso;
+        errno = ENOTCONN;
+        return -1;   
+    }
+
+    if( (close(sfd)) == -1){
+        perror("chiusura socket");
+        return -1;
+    }
+
+    sfd = -1; //reset del socket una volta disconnesso
+
 
 
     return 0;

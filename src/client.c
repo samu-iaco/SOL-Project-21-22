@@ -15,6 +15,7 @@
 #include <utils.h>
 
 
+
 int main(int argc, char *argv[])
 {
 
@@ -23,7 +24,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    node *queue = init_queue(); //coda richieste
+    requestList *queue = init_queue(); //coda richieste
 
     //passo questa coda a una funzione che parsa le richieste
     if( parsing(argc,argv,queue) == -1 ){

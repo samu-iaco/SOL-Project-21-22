@@ -12,11 +12,12 @@
 
 #include <queue.h>
 
-#define SYSCALL(r, c, e) \
+#define SYSCALL(r, c, e,err) \
     if ((r = c) == -1)   \
     {                    \
         perror(e);       \
-        exit(errno);     \
+        errno = err;     \
+        return -1;       \
     }
 
 
@@ -45,7 +46,7 @@ char* alloc_strings(size_t dim);
  * @param  *queue: coda di richieste
  * @return -1 in caso di fallimento. errno viene settata 
  */
-int parsing(int argc, char *argv[], node *queue);
+int parsing(int argc, char *argv[], requestList *queue);
 
 
 #endif

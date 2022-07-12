@@ -16,8 +16,9 @@
 #include <utils.h>
 
 char *mysock;
+int alreadyconnected = 0;
 
-int parsing(int argc, char *argv[], node *queue)
+int parsing(int argc, char *argv[], requestList *queue)
 {
     int cmd = 0;
 
@@ -26,9 +27,16 @@ int parsing(int argc, char *argv[], node *queue)
         switch (cmd)
         {
         case 'f':
-
-            mysock = alloc_strings(strlen(optarg));
-            strcpy(mysock, optarg);
+            if(alreadyconnected){
+                printf("il client è gia connesso\n");
+                exit(EXIT_FAILURE);
+            }
+            else{
+                mysock = alloc_strings(strlen(optarg));
+                strcpy(mysock, optarg);
+                alreadyconnected = 1;
+            }
+            
             
             break;
         }

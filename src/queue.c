@@ -1,7 +1,7 @@
 #include <queue.h>
 
-node* init_queue(){
-    node *q = malloc(sizeof(node *));
+requestList* init_queue(){
+    requestList *q = malloc(sizeof(requestList *));
     if(q == NULL){
         perror("malloc init_queue");
         exit(EXIT_FAILURE);

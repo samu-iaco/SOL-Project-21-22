@@ -11,13 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct _node
+typedef struct requestList_t
 {
     char *request;
     struct _node* next;
-}node;
+}requestList;
 
 
 
-node* init_queue();
+requestList* init_queue();
 
