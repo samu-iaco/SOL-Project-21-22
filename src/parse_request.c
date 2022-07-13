@@ -15,7 +15,7 @@
 #include <api.h>
 #include <utils.h>
 
-char *mysock;
+char const *mysock;
 int alreadyconnected = 0;
 
 int parsing(int argc, char *argv[], requestList *queue)
@@ -33,7 +33,7 @@ int parsing(int argc, char *argv[], requestList *queue)
             }
             else{
                 mysock = alloc_strings(strlen(optarg));
-                strcpy(mysock, optarg);
+                mysock = optarg;
                 alreadyconnected = 1;
             }
             

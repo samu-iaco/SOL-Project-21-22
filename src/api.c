@@ -54,11 +54,13 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         errno = EISCONN;
         return -1;
     }
-
+    
     int unused;
     SYSCALL(sfd,socket(AF_UNIX, SOCK_STREAM, 0),"Error creating socket",errno);
+    printf("sfd dopo socket: %d\n",sfd);
     
-    struct sockaddr_un serv_addr; /* ind AF_UNIX */
+    struct sockaddr_un serv_addr;
+    printf("sockname api:%s\n",sockname);
     strcpy(serv_addr.sun_path, sockname);
     memset(&serv_addr, '0', sizeof(serv_addr));
     serv_addr.sun_family = AF_UNIX;
@@ -77,8 +79,8 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         return -1;
     }
 
-    while( (connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr) == -1 ) && remaining > 0) ){
-        printf("CLIENT: impossibile connettersi");
+    while( (connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr)) == -1 ) && remaining > 0 ){
+        printf("CLIENT: impossibile connettersi\n");
         
         SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &end),"getting current time",errno);
 
@@ -95,13 +97,18 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         SYSCALL(unused,nanosleep(&t,NULL),"nanosleep",errno); 
     }
 
-    if(sfd){
-        printf("CLIENT: connessione con il server stabilita\n");
-
-        // init_socket(sfd,sockname);
-        mysock = sockname;
-        return 0;
+    if( (remaining <= 0) ){
+        printf("CLIENT: Connessione fallita\n");
+        return -1;
     }
+
+    
+    printf("CLIENT: connessione con il server stabilita\n");
+
+    // init_socket(sfd,sockname);
+    mysock = sockname;
+    return 0;
+    
     
 
 

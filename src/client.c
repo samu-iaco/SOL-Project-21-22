@@ -36,10 +36,10 @@ int main(int argc, char *argv[])
     struct timespec t;
     t.tv_sec = 5;
     t.tv_nsec = 0;
-
+    printf("mysock client:%s\n",mysock);
     if( (openConnection(mysock,1000,t)) == -1 ){
         perror("CLIENT: impossibile stabilire connessione con il server");
-        printf("\n errno da connessione fallita: %d\n",errno);
+        printf("\nerrno da connessione fallita: %d\n",errno);
         exit(EXIT_FAILURE);
     }
 

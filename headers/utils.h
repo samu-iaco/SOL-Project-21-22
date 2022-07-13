@@ -16,7 +16,7 @@
     if ((r = c) == -1)   \
     {                    \
         perror(e);       \
-        errno = err;     \
+        err = errno;     \
         return -1;       \
     }
 
