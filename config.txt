@@ -1,1 +1,1 @@
-SOCKNAME = ./mysock
+SOCKNAME    =           mysock
