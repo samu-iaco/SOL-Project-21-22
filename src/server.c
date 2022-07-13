@@ -39,8 +39,7 @@ int main(int argc, char *argv[])
         printf("Passare come primo parametro il percorso del file di configurazione\n");
         exit(EXIT_FAILURE);
     }
-
-    char* path_to_conf = argv[1];
+ 
 
     sample_parameters parms;
     printf("Initializing parameters to default values...\n");
@@ -50,8 +49,8 @@ int main(int argc, char *argv[])
     parse_config_file(&parms,argv[1]);
 
     printf("Final values:\n");
-    printf("  sockname: %s\n",
-           parms.sockname);
+    printf("\tsockname: %s\n\tn.worker: %ld\n\tcapacita server (#file): %ld\n", 
+           parms.sockname, parms.nworker, parms.maxfile);
 
     return 0;
 }

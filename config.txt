@@ -1,1 +1,5 @@
 SOCKNAME    =           mysock
+
+NWORKER = 374
+
+CAPACITY = 3992

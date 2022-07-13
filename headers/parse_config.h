@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
 #define MAXLEN 80
 
 typedef struct sample_parameters
 {
     char sockname[MAXLEN];
-    int nworker;
-    int maxfile;
+    long nworker;
+    long maxfile;
 }sample_parameters;
   
 
