@@ -43,7 +43,7 @@ int closeConnection(const char* sockname);
 //  * in modalità locked
 //  * @return 0 in caso di successo, -1 altrimenti. errno viene settata
 //  */
-// int openFile(const char* pathname, int flags);
+int openFile(const char* pathname, int flags);
 
 
 // /**

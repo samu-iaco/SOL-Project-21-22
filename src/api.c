@@ -140,3 +140,11 @@ int closeConnection(const char* sockname){
 
     return 0;
 }
+
+
+
+
+int openFile(const char* pathname, int flags){
+
+    return 0;
+}
