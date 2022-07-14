@@ -17,6 +17,7 @@
 #include <utils.h>
 #include "api.h"
 
+
 int sfd = -1; 
 
 long timespecdifference(struct timespec start, struct timespec end, struct timespec goal){
@@ -61,9 +62,9 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
     
     struct sockaddr_un serv_addr;
     printf("sockname api:%s\n",sockname);
-    strcpy(serv_addr.sun_path, sockname);
     memset(&serv_addr, '0', sizeof(serv_addr));
     serv_addr.sun_family = AF_UNIX;
+    strncpy(serv_addr.sun_path, mysock, strlen(mysock)+1);
 
     //tempo tra un tentarivo e l'altro nel caso in cui il server non accetta la connessione
     struct timespec start, end;
@@ -79,8 +80,10 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         return -1;
     }
 
-    while( (connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr)) == -1 ) && remaining > 0 ){
-        printf("CLIENT: impossibile connettersi\n");
+    int tmp;
+
+    while( (tmp = connect(sfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr))) == -1  && remaining > 0 ){
+        printf("CLIENT: impossibile connettersi attraverso il socket %s\n il socket mysock è %s\n",sockname, mysock);
         
         SYSCALL(unused,clock_gettime(CLOCK_MONOTONIC, &end),"getting current time",errno);
 
@@ -97,39 +100,39 @@ int openConnection(const char* sockname, int msec, const struct timespec abstime
         SYSCALL(unused,nanosleep(&t,NULL),"nanosleep",errno); 
     }
 
-    if( (remaining <= 0) ){
-        printf("CLIENT: Connessione fallita\n");
-        return -1;
-    }
+    // if( (remaining <= 0) ){
+    //     printf("CLIENT: Connessione fallita\n");
+    //     return -1;
+    // }
 
     
-    printf("CLIENT: connessione con il server stabilita\n");
+    // printf("CLIENT: connessione con il server stabilita\n");
 
-    // init_socket(sfd,sockname);
-    mysock = sockname;
-    return 0;
+    // // init_socket(sfd,sockname);
+    // mysock = sockname;
+    // return 0;
     
-    
-
-
-    return -1;
-
+    printf("tmp : %d\n",tmp);
+    return tmp;
 }    
 
 
 
 int closeConnection(const char* sockname){
     NULL_CHECK(sockname,EINVAL);
+    int err;
 
     if( strcmp(mysock,sockname)!=0 ){ //client non connesso;
         errno = ENOTCONN;
         return -1;   
     }
 
-    if( (close(sfd)) == -1){
-        perror("chiusura socket");
-        return -1;
-    }
+    // if( (close(sfd)) == -1 ){
+    //     perror("chiusura socket");
+    //     return -1;
+    // }
+    
+    SYSCALL(err,close(sfd),"closeConnection",errno);
 
     sfd = -1; //reset del socket una volta disconnesso
 

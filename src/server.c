@@ -16,12 +16,19 @@
 #define UNIX_PATH_MAX 108
 #define N 1024
 
+void cleanup(char *sockname){
+    unlink(sockname);
+}
+
 int main(int argc, char *argv[])
 {
     if(argc <= 1){
         printf("Passare come primo parametro il percorso del file di configurazione\n");
         exit(EXIT_FAILURE);
     }
+
+
+
     int sfd, /* socket di connessione */
         sfd_c, /* socket di I/O con un client */
         fd_num=0, /* max fd attivo */
@@ -36,9 +43,11 @@ int main(int argc, char *argv[])
     printf("Initializing parameters to default values...\n");
     init_parameters(&parms);
 
+
     printf("Reading config file...\n");
     parse_config_file(&parms,argv[1]);
 
+    cleanup(parms.sockname);
     printf("Final values:\n");
     printf("\tsockname: %s\n\tn.worker: %ld\n\tcapacita server (#file): %ld\n", 
            parms.sockname, parms.nworker, parms.maxfile);
@@ -80,7 +89,7 @@ int main(int argc, char *argv[])
                 if(FD_ISSET(fd,&rdset)){
                     if(fd == sfd){
                         sfd_c = accept(sfd,NULL,0);
-                        printf("connessione con client stabilita!\n");
+                        printf("SERVER: connessione con client stabilita!\n");
                         FD_SET(sfd_c,&set);
                         if(sfd_c > fd_num) fd_num = sfd_c;
                     }else{
@@ -103,7 +112,7 @@ int main(int argc, char *argv[])
 
                         // SYSCALL(r,write(fd,&len,sizeof(int)), "Error writing lenght string on client",errno);
                         // SYSCALL(r,write(fd,up,len*sizeof(char)), "Error writing string on client",errno);
-                        printf("haohaohao\n");
+                        //printf("haohaohao\n");
 
 
                     }

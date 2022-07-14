@@ -1,4 +1,4 @@
-SOCKNAME    =           ./mysock
+SOCKNAME    =           ./mysock.sk
 
 NWORKER = 374
 

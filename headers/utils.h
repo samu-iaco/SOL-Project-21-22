@@ -20,6 +20,12 @@
         return -1;       \
     }
 
+#define OP_CHECK(r, c, op, e)                                               \
+    if ((r = c) == -1)                                                      \
+    {                                                                       \
+        fprintf(stderr, "errore operazione %s: %s\n", op, strerror(e));     \
+        exit(EXIT_FAILURE);                                                 \
+    }
 
 #define NULL_CHECK(str, e) \
     if (str == NULL)   \
