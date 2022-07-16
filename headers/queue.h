@@ -14,7 +14,7 @@
 typedef struct requestList_t
 {
     char *request;
-    struct _node* next;
+    struct requestList* next;
 }requestList;
 
 

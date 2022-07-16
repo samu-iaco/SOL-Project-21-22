@@ -12,6 +12,7 @@
 
 #include <utils.h>
 #include <parse_config.h>
+// #include <storagelist.h>
 
 #define UNIX_PATH_MAX 108
 #define N 1024
@@ -51,6 +52,8 @@ int main(int argc, char *argv[])
     printf("Final values:\n");
     printf("\tsockname: %s\n\tn.worker: %ld\n\tcapacita server (#file): %ld\n", 
            parms.sockname, parms.nworker, parms.maxfile);
+
+
 
 
 
