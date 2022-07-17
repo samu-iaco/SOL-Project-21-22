@@ -17,3 +17,19 @@ file *init_file()
 
     return tmp;
 }
+
+file* create_file(char *pathname, size_t size){
+    file *tmp;
+
+    if(tmp == NULL){
+        perror("file non ancora allocato");
+        exit(EXIT_FAILURE);
+    }
+
+    tmp->name = pathname;
+    tmp->size = size;
+    tmp->used = NULL;
+
+    return tmp;
+
+}

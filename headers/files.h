@@ -14,7 +14,7 @@ typedef struct _file
 
 file* init_file();
 
-file create_file(char *pathname, size_t size);
+file* create_file(char *pathname, size_t size);
 
 
 

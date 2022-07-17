@@ -12,7 +12,8 @@
 
 #include <utils.h>
 #include <parse_config.h>
-// #include <storagelist.h>
+#include <storagelist.h>
+#include <files.h>
 
 #define UNIX_PATH_MAX 108
 #define N 1024
@@ -54,8 +55,13 @@ int main(int argc, char *argv[])
            parms.sockname, parms.nworker, parms.maxfile);
 
 
-
-
+    /* INIZIALIZZAZIONE DELLO STORAGE */
+    storage *file_storage;
+    file_storage = init_storage();
+    file *test;
+    test = init_file();
+    //OTTENERE SIZE FILE E PATH ASSOLUTO
+    test = create_file("./test.txt",)
 
     //Creo il socket
     SYSCALL(sfd, socket(AF_UNIX, SOCK_STREAM, 0), "Server - Error creating socket",errno);
