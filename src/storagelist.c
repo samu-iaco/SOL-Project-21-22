@@ -19,7 +19,7 @@ storage *init_storage()
 
 size_t dim_storage(storage *currStorage)
 {
-    if (currStorage == NULL)
+    if (!currStorage)
     {
         perror("inizializzazione storage");
         fprintf(stderr, "errore inizializzazione storage: %s\n",strerror(errno));

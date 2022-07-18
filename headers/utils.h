@@ -56,7 +56,6 @@ char* alloc_strings(size_t dim);
  */
 int parsing(int argc, char *argv[], requestList *queue);
 
-char* app_path(char* path, const char* filename);
 
 
 #endif

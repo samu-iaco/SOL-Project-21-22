@@ -8,14 +8,14 @@ typedef struct _storage
 {
     file f;
     size_t dimCache;
-    storage *next;
+    struct _storage *next;
 
 }storage;
 
 
 storage* init_storage();
 
-size_t dim_storage(storage* currStorage);
+size_t dim_storage(storage *currStorage);
 
 
 #endif

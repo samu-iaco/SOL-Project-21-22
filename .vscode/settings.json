@@ -1,6 +1,8 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
-        "select.h": "c"
+        "select.h": "c",
+        "unistd.h": "c",
+        "time.h": "c"
     }
 }
