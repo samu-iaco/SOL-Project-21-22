@@ -7,13 +7,15 @@
 typedef struct _storage
 {
     file f;
-    size_t dimCache;
+    size_t dimStorage;
     struct _storage *next;
 
 }storage;
 
 
 storage* init_storage();
+
+void addfileTail(storage **currStorage, file currFile);
 
 size_t dim_storage(storage *currStorage);
 

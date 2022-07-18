@@ -6,37 +6,40 @@
 
 
 
-file *init_file(char *pathname, off_t size)
+file *init_file(const char *pathname, off_t size)
 {
     file *tmp;
-
+    printf("pathname passato a init file:%s\n ",pathname);
     tmp = (file *)malloc(sizeof(file));
     if (!tmp)
     {
         perror("malloc storage");
         exit(EXIT_FAILURE);
     }
-    tmp->name = pathname;
+
+    char *storedName = (char*) malloc(strlen(pathname) + 1);
+    strncpy(storedName, pathname, strlen(pathname) + 1);
+    tmp->name = storedName;
     tmp->size = size;
     tmp->used = (time_t) NULL;
 
     return tmp;
 }
 
-file* create_file(char *pathname, size_t size){
-    file *tmp;
+// file* create_file(char *pathname, size_t size){
+//     file *tmp;
 
-    if(tmp == NULL){
-        perror("file non ancora allocato");
-        exit(EXIT_FAILURE);
-    }
+//     if(tmp == NULL){
+//         perror("file non ancora allocato");
+//         exit(EXIT_FAILURE);
+//     }
 
-    tmp->name = pathname;
-    tmp->size = size;
-    tmp->used = (time_t) NULL;
+//     tmp->name = pathname;
+//     tmp->size = size;
+//     tmp->used = (time_t) NULL;
 
-    return tmp;
-}
+//     return tmp;
+// }
 
 
 off_t fsize(const char *filename) {
@@ -54,7 +57,6 @@ off_t fsize(const char *filename) {
 
 char* app_path(char* path, const char* filename){
     char buf[PATH_MAX];
-    //char res[PATH_MAX+1];
     
     if (filename[0] == '/') {    // run with absolute path
         strcpy(buf, filename);
@@ -65,8 +67,7 @@ char* app_path(char* path, const char* filename){
         }
         strcat(buf, "/");
         strcat(buf, filename);
-        printf("buf now: %s\n" , buf);
-        
+
     }
     if (NULL == realpath(buf, path)) {
         perror("realpath error");

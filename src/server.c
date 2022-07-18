@@ -57,13 +57,33 @@ int main(int argc, char *argv[])
 
     /* INIZIALIZZAZIONE DELLO STORAGE */
     storage *file_storage = NULL;
-    file_storage = init_storage();
+    //file_storage = init_storage();
     printf("storage inizializzato\n");
     char currpath[4097];
     char* abspath = app_path(currpath,"./test.txt");
-    printf("il percorso assoluto del file test è: %s\n",abspath);
+    //printf("il percorso assoluto del file test è: %s\n",abspath);
     off_t filesize = fsize("test.txt");
-    printf("la dimensione del file test è: %ld\n",filesize);
+    //printf("la dimensione del file test è: %ld\n",filesize);
+
+    file* f1 = init_file(abspath,filesize);
+    memset(currpath, 0, sizeof(currpath));
+
+    abspath = app_path(currpath,"./poesia.txt");
+    //printf("il percorso assoluto del file poesia è: %s\n",abspath);
+    filesize = fsize("poesia.txt");
+    //printf("la dimensione del file poesia è: %ld\n",filesize);
+
+    file* f2 = init_file(abspath,filesize);
+
+
+    addfileTail(&file_storage, *f1);
+   
+    addfileTail(&file_storage, *f2);
+
+    size_t dim = dim_storage(file_storage);
+    printf("la dimensione di tutto il file storage è: %ld\n",dim);
+
+
     //test = init_file(abspath,filesize);
     //OTTENERE SIZE FILE E PATH ASSOLUTO
     

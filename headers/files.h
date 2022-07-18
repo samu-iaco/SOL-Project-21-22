@@ -16,9 +16,9 @@ typedef struct _file
     //tempo nella cache
 }file;
 
-file* init_file(char *pathname, off_t size);
+file* init_file(char const *pathname, off_t size);
 
-file* create_file(char *pathname, size_t size);
+//file* create_file(char *pathname, size_t size);
 
 char* app_path(char* path, const char* filename);
 
