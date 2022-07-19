@@ -21,7 +21,7 @@ int alreadyconnected = 0;
 int parsing(int argc, char *argv[], requestList *queue)
 {
     int cmd = 0;
-    char *saveptr;
+    char *saveptr1, *saveptr2;
 
     while ((cmd = getopt(argc, argv, "h:f:w:W:d:D:r:R:t:l:u:c:p")) != -1)
     {
@@ -48,17 +48,39 @@ int parsing(int argc, char *argv[], requestList *queue)
             char* dir; // directory contenente i file da inviare al server
             char* abspath;
             char  path[PATH_MAX];
-            // getting directory name
-            dir = strtok_r(optarg, ",", &saveptr);
-            if (dir == NULL)
-            {
-                fprintf(stderr, "Error in parsing option -w: couldn't read directory name.\n");
-                return -1;
-            }
-            printf("dir: %s\n",dir);
-            abspath = app_path(path,dir);
+            char* numfile;
 
-            printf("abs path of dir: %s: %s\n", dir, abspath);
+            char* test = optarg;
+            printf("optarg w: %s\n", test);
+
+            while(numfile != NULL){
+                
+                dir = strtok_r(optarg, ",", &saveptr1);
+                if(dir == NULL){
+                    printf("errore nel comando -w: impossibile ottenere nome della cartella\n");
+                    return -1;
+                }
+                printf("dir: %s\n", dir);
+                numfile = strtok_r(NULL,",",&saveptr1);
+
+                printf("numfile: %s\n", numfile);
+                if(numfile == NULL)
+                    break;
+
+            }
+
+
+            // abspath = app_path(path,dir);
+            // if(abspath == NULL){
+            //     //perror("errore ottenimento path assoluto cartella");
+            //     return -1;
+            // }
+            // printf("abs path of dir %s: %s\n", dir, abspath);
+
+            // numfile = strtok_r(optarg, " ", &saveptr2);
+            // printf("numero di file da inviare al server: %s\n" , numfile);
+
+
 
             break;
         }
