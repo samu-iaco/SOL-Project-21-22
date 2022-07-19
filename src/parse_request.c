@@ -1,6 +1,5 @@
 #define _POSIX_C_SOURCE 200809L
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,6 +13,7 @@
 
 #include <api.h>
 #include <utils.h>
+#include <files.h>
 
 char const *mysock;
 int alreadyconnected = 0;
@@ -21,28 +21,49 @@ int alreadyconnected = 0;
 int parsing(int argc, char *argv[], requestList *queue)
 {
     int cmd = 0;
+    char *saveptr;
 
     while ((cmd = getopt(argc, argv, "h:f:w:W:d:D:r:R:t:l:u:c:p")) != -1)
     {
         switch (cmd)
         {
         case 'f':
-            if(alreadyconnected){
+        {
+            if (alreadyconnected)
+            {
                 printf("il client è gia connesso\n");
-                exit(EXIT_FAILURE);
+                return -1;
             }
-            else{
+            else
+            {
                 mysock = alloc_strings(strlen(optarg));
                 mysock = optarg;
                 alreadyconnected = 1;
             }
-            
-            
             break;
         }
-    }
 
-    printf("mysock: %s\n" , mysock);
+        case 'w':
+        {
+            char* dir; // directory contenente i file da inviare al server
+            char* abspath;
+            char  path[PATH_MAX];
+            // getting directory name
+            dir = strtok_r(optarg, ",", &saveptr);
+            if (dir == NULL)
+            {
+                fprintf(stderr, "Error in parsing option -w: couldn't read directory name.\n");
+                return -1;
+            }
+            printf("dir: %s\n",dir);
+            abspath = app_path(path,dir);
+
+            printf("abs path of dir: %s: %s\n", dir, abspath);
+
+            break;
+        }
+        }
+    }
 
     return 0;
 }

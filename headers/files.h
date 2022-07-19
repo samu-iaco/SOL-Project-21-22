@@ -18,9 +18,6 @@ typedef struct _file
 
 file* init_file(char const *pathname, off_t size);
 
-//file* create_file(char *pathname, size_t size);
-
-char* app_path(char* path, const char* filename);
 
 off_t fsize(const char *filename);
 

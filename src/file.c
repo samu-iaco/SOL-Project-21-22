@@ -4,6 +4,8 @@
 #include <linux/limits.h>
 #include <limits.h>
 
+#include <utils.h>
+
 
 
 file *init_file(const char *pathname, off_t size)
@@ -26,21 +28,6 @@ file *init_file(const char *pathname, off_t size)
     return tmp;
 }
 
-// file* create_file(char *pathname, size_t size){
-//     file *tmp;
-
-//     if(tmp == NULL){
-//         perror("file non ancora allocato");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     tmp->name = pathname;
-//     tmp->size = size;
-//     tmp->used = (time_t) NULL;
-
-//     return tmp;
-// }
-
 
 off_t fsize(const char *filename) {
     struct stat st;
@@ -55,23 +42,4 @@ off_t fsize(const char *filename) {
 }
 
 
-char* app_path(char* path, const char* filename){
-    char buf[PATH_MAX];
-    
-    if (filename[0] == '/') {    // run with absolute path
-        strcpy(buf, filename);
-    } else {    // run with relative path
-        if(NULL == getcwd(buf, PATH_MAX)) {
-            perror("getcwd error");
-            return NULL;
-        }
-        strcat(buf, "/");
-        strcat(buf, filename);
 
-    }
-    if (NULL == realpath(buf, path)) {
-        perror("realpath error");
-        return NULL;
-    }
-    return path;
-}

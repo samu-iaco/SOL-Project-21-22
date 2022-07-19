@@ -14,6 +14,11 @@
 
 #define _POSIX_C_SOURCE 200809L
 #include <sys/time.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+
 
 extern const char* mysock; //nome del socket a cui connettersi
 extern int sfd;

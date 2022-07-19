@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <limits.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
 
 #include <queue.h>
 
@@ -57,5 +60,10 @@ char* alloc_strings(size_t dim);
 int parsing(int argc, char *argv[], requestList *queue);
 
 
+ssize_t readn(int fd, void *ptr, size_t n);
+
+ssize_t writen(int fd, void *ptr, size_t n);
+
+char* app_path(char* path, const char* filename);
 
 #endif

@@ -145,6 +145,14 @@ int closeConnection(const char* sockname){
 
 
 int openFile(const char* pathname, int flags){
+    NULL_CHECK(pathname,EINVAL);
+
+    if(sfd == -1){
+        errno = ENOTCONN;
+        return -1;
+    }
+
+    
 
     return 0;
 }
