@@ -18,10 +18,17 @@
 char const *mysock;
 int alreadyconnected = 0;
 
+long isNumber(const char* s) {
+   char* e = NULL;
+   long val = strtol(s, &e, 0);
+   if (e != NULL && *e == (char)0) return val; 
+   return -1;
+}
+
 int parsing(int argc, char *argv[], requestList *queue)
 {
     int cmd = 0;
-    char *saveptr1, *saveptr2;
+    char *saveptr1;
 
     while ((cmd = getopt(argc, argv, "h:f:w:W:d:D:r:R:t:l:u:c:p")) != -1)
     {
@@ -45,40 +52,36 @@ int parsing(int argc, char *argv[], requestList *queue)
 
         case 'w':
         {
-            char* dir; // directory contenente i file da inviare al server
-            char* abspath;
-            char  path[PATH_MAX];
-            char* numfile;
+            char *dir; // directory contenente i file da inviare al server
+            char *abspath;
+            char path[PATH_MAX];
+            char *numfile;
 
-            char* test = optarg;
-            printf("optarg w: %s\n", test);
+            dir = strtok_r(optarg, ",", &saveptr1);
+            if (dir == NULL)
+            {
+                printf("errore nel comando -w: impossibile ottenere nome della cartella\n");
+                return -1;
+            }
+            printf("dir: %s\n", dir);
+            numfile = strtok_r(NULL, ",", &saveptr1);
 
-            while(numfile != NULL){
-                
-                dir = strtok_r(optarg, ",", &saveptr1);
-                if(dir == NULL){
-                    printf("errore nel comando -w: impossibile ottenere nome della cartella\n");
-                    return -1;
-                }
-                printf("dir: %s\n", dir);
-                numfile = strtok_r(NULL,",",&saveptr1);
-
-                printf("numfile: %s\n", numfile);
-                if(numfile == NULL)
-                    break;
-
+            if( isNumber(numfile) == -1 ){
+                printf("il numero di file da passare al server deve essere un numero\n");
+                return -1;
             }
 
 
-            // abspath = app_path(path,dir);
-            // if(abspath == NULL){
-            //     //perror("errore ottenimento path assoluto cartella");
-            //     return -1;
-            // }
-            // printf("abs path of dir %s: %s\n", dir, abspath);
+            abspath = app_path(path,dir);
+            if(abspath == NULL){
+                //perror("errore ottenimento path assoluto cartella");
+                return -1;
+            }
 
-            // numfile = strtok_r(optarg, " ", &saveptr2);
-            // printf("numero di file da inviare al server: %s\n" , numfile);
+            
+            printf("abs path of dir %s: %s\n", dir, abspath);
+
+            printf("numero di file da inviare al server: %s\n" , numfile);
 
 
 

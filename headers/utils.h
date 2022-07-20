@@ -40,6 +40,8 @@
     }
 
 
+#define OPENFILE "openfile"
+
 
 /**
  * @brief alloca una stringa data la sua dimensione

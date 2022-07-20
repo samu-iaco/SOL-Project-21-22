@@ -18,6 +18,8 @@
 #include "api.h"
 
 
+#define REQLEN 1024
+
 int sfd = -1; 
 
 long timespecdifference(struct timespec start, struct timespec end, struct timespec goal){
@@ -149,10 +151,23 @@ int openFile(const char* pathname, int flags){
 
     if(sfd == -1){
         errno = ENOTCONN;
+        perror("openfile");
         return -1;
     }
 
-    
+    //invio richiesta di operazione al server
+    char* op = OPENFILE;
+    if( (writen(sfd,OPENFILE,sizeof(op))) == -1 ){
+        fprintf(stderr, "errore richiesta operazione openFile: %s\n", strerror(errno));
+        return -1;
+    }
+
+    //invio file al server
+    if( (writen(sfd,pathname,sizeof(pathname))) == -1 ){
+        fprintf(stderr, "errore invio file operazione openFile: %s\n", strerror(errno));
+        return -1;
+    }
+
 
     return 0;
 }
