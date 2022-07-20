@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/select.h>
+#include <dirent.h>
 
 #include <api.h>
 #include <utils.h>
@@ -18,11 +19,77 @@
 char const *mysock;
 int alreadyconnected = 0;
 
+
+
 long isNumber(const char* s) {
    char* e = NULL;
    long val = strtol(s, &e, 0);
    if (e != NULL && *e == (char)0) return val; 
    return -1;
+}
+
+int recursive_dir_search(char* directory){
+    DIR *dir;
+    //struct per ricerca directory
+    struct dirent *entry;
+    struct stat filestat;
+    char path[PATH_MAX];
+    char* pathfile;
+
+    int checkclosedir;
+
+	if( (dir = opendir(directory)) == NULL){
+        perror("opendir");
+        return -1;
+    }
+
+	printf("Directory: %s\n",directory);
+
+    while ((entry = readdir(dir)))
+	{
+		char fullname[FILENAME_MAX];
+		sprintf(fullname, "%s/%s", directory, entry->d_name);
+
+		if( (stat(fullname, &filestat)) == -1 ){
+            perror("stat"); 
+            return -1;
+        }
+
+		
+
+		if (S_ISDIR(filestat.st_mode))
+		{
+			//printf("%4s: %s\n", "Dir", fullname);
+			
+			if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0)
+			{
+				//printf("Directory: %s\n" , entry->d_name);
+				//printf("\n*Entering a subDirectory*\n");
+				recursive_dir_search(fullname);
+				//printf("\n*Leaving a subDirectory*\n");
+			}
+		}
+		else
+		{
+			printf("\t%s\t", entry->d_name); // nome file   
+            pathfile = app_path(path,fullname);
+            if(pathfile == NULL){
+                printf("errore su percorso assoluto del file %s\n",fullname);
+                return -1;
+            }
+            printf("percorso assoluto file: %s\n",pathfile);
+
+            
+		}
+	}
+
+    	checkclosedir = closedir(dir);
+        if(checkclosedir == -1){
+            perror("close dir");
+            return -1;
+        }
+
+    return 0;
 }
 
 int parsing(int argc, char *argv[], requestList *queue)
@@ -82,6 +149,11 @@ int parsing(int argc, char *argv[], requestList *queue)
             printf("abs path of dir %s: %s\n", dir, abspath);
 
             printf("numero di file da inviare al server: %s\n" , numfile);
+
+            int ressearchdir = recursive_dir_search(abspath);
+
+            printf("ressearchdir: %d\n" , ressearchdir);
+
 
 
 

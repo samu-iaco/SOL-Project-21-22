@@ -52,6 +52,8 @@ writen(int fd, void *ptr, size_t n) {
    return(n - nleft); /* return >= 0 */
 }
 
+
+
 char* app_path(char* path, const char* filename){
     char buf[PATH_MAX];
     
@@ -64,6 +66,7 @@ char* app_path(char* path, const char* filename){
         }
         strcat(buf, "/");
         strcat(buf, filename);
+        printf("buf: %s\n",filename);
 
     }
     if (NULL == realpath(buf, path)) {
