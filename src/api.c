@@ -152,26 +152,37 @@ int openFile(const char *pathname, int flags)
     }
 
     //invio richiesta di operazione al server
-    char *op = OPENFILE;
-    if ((writen(sfd, OPENFILE, sizeof(op))) == -1)
+    int op = OPENFILE;
+    if ((writen(sfd, &op, sizeof(int))) == -1)
     {
         fprintf(stderr, "errore richiesta operazione openFile: %s\n", strerror(errno));
         return -1;
     }
 
+    int len_name = strlen(pathname);
+
+    //invio lunghezza file al server
+    if ((writen(sfd, &len_name, sizeof(int))) == -1)
+    {
+        fprintf(stderr, "errore invio file operazione openFile: %s\n", strerror(errno));
+        return -1;
+    }
+
     //invio file al server
-    if ((writen(sfd, pathname, sizeof(pathname))) == -1)
+    if ((writen(sfd, (void *)pathname, sizeof(pathname))) == -1)
     {
         fprintf(stderr, "errore invio file operazione openFile: %s\n", strerror(errno));
         return -1;
     }
 
     //invio flags al server
-    if ((writen(sfd, flags, sizeof(int))) == -1)
-    {
-        fprintf(stderr, "errore invio flags operazione openFile: %s\n", strerror(errno));
-        return -1;
-    }
+    // if ((writen(sfd, &flags, sizeof(int))) == -1)
+    // {
+    //     fprintf(stderr, "errore invio flags operazione openFile: %s\n", strerror(errno));
+    //     return -1;
+    // }
+
+    // int answer;
 
     return 0;
 }

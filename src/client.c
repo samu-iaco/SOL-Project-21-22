@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     }
 
     /* timespec per timeout connessione client */
-    struct timespec t;
-    t.tv_sec = 5;
-    t.tv_nsec = 0;
+    // struct timespec t;
+    // t.tv_sec = 5;
+    // t.tv_nsec = 0;
     printf("mysock client: %s\n",mysock);
     // if( (openConnection(mysock,1000,t)) == -1 ){
     //     perror("CLIENT: impossibile stabilire connessione con il server");
@@ -44,10 +44,10 @@ int main(int argc, char *argv[])
     // }
 
 
-    OP_CHECK(err,openConnection(mysock,1000,t),"open connection",errno);
-    printf("err openconnection: %d\n", err);
+    // OP_CHECK(err,openConnection(mysock,1000,t),"open connection",errno);
+    // printf("err openconnection: %d\n", err);
 
-    printf("CLIENT: connessione stabilita con successo\n");
+    // printf("CLIENT: connessione stabilita con successo\n");
 
     OP_CHECK(err,closeConnection(mysock),"close connection",errno);
 

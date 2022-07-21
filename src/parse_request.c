@@ -19,75 +19,82 @@
 char const *mysock;
 int alreadyconnected = 0;
 
-
-
-long isNumber(const char* s) {
-   char* e = NULL;
-   long val = strtol(s, &e, 0);
-   if (e != NULL && *e == (char)0) return val; 
-   return -1;
+long isNumber(const char *s)
+{
+    char *e = NULL;
+    long val = strtol(s, &e, 0);
+    if (e != NULL && *e == (char)0)
+        return val;
+    return -1;
 }
 
-int recursive_dir_search(char* directory){
+int recursive_dir_search(char *directory)
+{
     DIR *dir;
-    //struct per ricerca directory
+    // struct per ricerca directory
     struct dirent *entry;
     struct stat filestat;
     char path[PATH_MAX];
-    char* pathfile;
+    char *pathfile;
 
     int checkclosedir;
 
-	if( (dir = opendir(directory)) == NULL){
+    if ((dir = opendir(directory)) == NULL)
+    {
         perror("opendir");
         return -1;
     }
 
-	printf("Directory: %s\n",directory);
+    printf("Directory: %s\n", directory);
 
     while ((entry = readdir(dir)))
-	{
-		char fullname[FILENAME_MAX];
-		sprintf(fullname, "%s/%s", directory, entry->d_name);
+    {
+        char fullname[FILENAME_MAX];
+        sprintf(fullname, "%s/%s", directory, entry->d_name);
 
-		if( (stat(fullname, &filestat)) == -1 ){
-            perror("stat"); 
+        if ((stat(fullname, &filestat)) == -1)
+        {
+            perror("stat");
             return -1;
         }
 
-		
+        if (S_ISDIR(filestat.st_mode))
+        {
+            // printf("%4s: %s\n", "Dir", fullname);
 
-		if (S_ISDIR(filestat.st_mode))
-		{
-			//printf("%4s: %s\n", "Dir", fullname);
-			
-			if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0)
-			{
-				//printf("Directory: %s\n" , entry->d_name);
-				//printf("\n*Entering a subDirectory*\n");
-				recursive_dir_search(fullname);
-				//printf("\n*Leaving a subDirectory*\n");
-			}
-		}
-		else
-		{
-			printf("\t%s\t", entry->d_name); // nome file   
-            pathfile = app_path(path,fullname);
-            if(pathfile == NULL){
-                printf("errore su percorso assoluto del file %s\n",fullname);
+            if (strcmp(entry->d_name, ".") != 0 && strcmp(entry->d_name, "..") != 0)
+            {
+                // printf("Directory: %s\n" , entry->d_name);
+                // printf("\n*Entering a subDirectory*\n");
+                recursive_dir_search(fullname);
+                // printf("\n*Leaving a subDirectory*\n");
+            }
+        }
+        else
+        {
+            printf("\t%s\t", entry->d_name); // nome file
+            pathfile = app_path(path, fullname);
+            if (pathfile == NULL)
+            {
+                printf("errore su percorso assoluto del file %s\n", fullname);
                 return -1;
             }
-            printf("percorso assoluto file: %s\n",pathfile);
+            printf("percorso assoluto file: %s\n", pathfile);
 
-            
-		}
-	}
-
-    	checkclosedir = closedir(dir);
-        if(checkclosedir == -1){
-            perror("close dir");
-            return -1;
+            if ((openFile(pathfile, O_CREATE | O_LOCK)) == -1)
+            {
+                perror("parsing openFile");
+                return -1;
+            }
         }
+    }
+
+    checkclosedir = closedir(dir);
+    if (checkclosedir == -1)
+    {
+        perror("close dir");
+        return -1;
+    }
 
     return 0;
 }
@@ -113,6 +120,15 @@ int parsing(int argc, char *argv[], requestList *queue)
                 mysock = alloc_strings(strlen(optarg));
                 mysock = optarg;
                 alreadyconnected = 1;
+                /* timespec per timeout connessione client */
+                struct timespec t;
+                t.tv_sec = 5;
+                t.tv_nsec = 0;
+                int err;
+                OP_CHECK(err, openConnection(mysock, 1000, t), "open connection", errno);
+                printf("err openconnection: %d\n", err);
+
+                printf("CLIENT: connessione stabilita con successo\n");
             }
             break;
         }
@@ -133,29 +149,29 @@ int parsing(int argc, char *argv[], requestList *queue)
             printf("dir: %s\n", dir);
             numfile = strtok_r(NULL, ",", &saveptr1);
 
-            if( isNumber(numfile) == -1 ){
+            if (isNumber(numfile) == -1)
+            {
                 printf("il numero di file da passare al server deve essere un numero\n");
                 return -1;
             }
 
-
-            abspath = app_path(path,dir);
-            if(abspath == NULL){
-                //perror("errore ottenimento path assoluto cartella");
+            abspath = app_path(path, dir);
+            if (abspath == NULL)
+            {
+                // perror("errore ottenimento path assoluto cartella");
                 return -1;
             }
 
-            
             printf("abs path of dir %s: %s\n", dir, abspath);
 
-            printf("numero di file da inviare al server: %s\n" , numfile);
+            printf("numero di file da inviare al server: %s\n", numfile);
 
             int ressearchdir = recursive_dir_search(abspath);
 
-            printf("ressearchdir: %d\n" , ressearchdir);
-
-
-
+            if (ressearchdir == -1)
+            {
+                return -1;
+            }
 
             break;
         }

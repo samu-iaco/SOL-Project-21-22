@@ -17,6 +17,11 @@
 
 #include <queue.h>
 
+#define O_CREATE 1
+#define O_LOCK 2
+
+#define OPENFILE 1
+
 #define SYSCALL(r, c, e,err) \
     if ((r = c) == -1)   \
     {                    \
@@ -42,7 +47,7 @@
 
 
 
-#define OPENFILE "openfile"
+
 
 
 /**
