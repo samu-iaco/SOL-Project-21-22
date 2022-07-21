@@ -142,6 +142,7 @@ int closeConnection(const char *sockname)
 
 int openFile(const char *pathname, int flags)
 {
+
     NULL_CHECK(pathname, EINVAL);
 
     if (sfd == -1)
@@ -159,7 +160,11 @@ int openFile(const char *pathname, int flags)
         return -1;
     }
 
+    assert(pathname);
+    printf("pathname lato client prima della write: %s\n", pathname);
     int len_name = strlen(pathname);
+
+    printf("lenname : %d\n",len_name);
 
     //invio lunghezza file al server
     if ((writen(sfd, &len_name, sizeof(int))) == -1)
@@ -169,11 +174,12 @@ int openFile(const char *pathname, int flags)
     }
 
     //invio file al server
-    if ((writen(sfd, (void *)pathname, sizeof(pathname))) == -1)
+    if ((writen(sfd, (void *)pathname, len_name+1)) == -1)
     {
         fprintf(stderr, "errore invio file operazione openFile: %s\n", strerror(errno));
         return -1;
     }
+
 
     //invio flags al server
     // if ((writen(sfd, &flags, sizeof(int))) == -1)

@@ -5,7 +5,7 @@ int openfile(int fd){
     int err;
     int len_name;
 
-    char *pathname;
+    char* pathname;
 
     int flags;
 
@@ -17,15 +17,25 @@ int openfile(int fd){
 
     printf("len file. %d\n", len_name);
 
-    pathname = malloc(sizeof(char) * (len_name + 1));
+    pathname = malloc(sizeof(char) * len_name);
+    if(pathname == NULL){
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
 
-    if( (err = readn(fd, &pathname, len_name+1)) == -1)
+    printf("ciao\n");
+    if( (err = readn(fd, (void*)pathname, len_name)) == -1)
     {
         perror("readn nome file");
         return -1;
     }
 
+    if(err == 0){
+        printf("pathname non valido\n");
+        return -1;
+    }
     printf("nomefile: %s\n",pathname);
+    
 
     // if( (err = readn(fd, &flags, sizeof(int))) == -1)
     // {

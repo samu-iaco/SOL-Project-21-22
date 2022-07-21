@@ -81,7 +81,7 @@ int recursive_dir_search(char *directory)
             }
             printf("percorso assoluto file: %s\n", pathfile);
 
-            if ((openFile(pathfile, O_CREATE | O_LOCK)) == -1)
+            if ((openFile(pathfile, 2)) == -1)
             {
                 perror("parsing openFile");
                 return -1;
@@ -148,11 +148,17 @@ int parsing(int argc, char *argv[], requestList *queue)
             }
             printf("dir: %s\n", dir);
             numfile = strtok_r(NULL, ",", &saveptr1);
-
-            if (isNumber(numfile) == -1)
+            if (numfile == NULL)
             {
-                printf("il numero di file da passare al server deve essere un numero\n");
-                return -1;
+                printf("non è stato passato un numero di file, invio tutti i file dentro la cartella: %s\n", dir);
+            }
+            else
+            {
+                if (isNumber(numfile) == -1)
+                {
+                    printf("il numero di file da passare al server deve essere un numero\n");
+                    return -1;
+                }
             }
 
             abspath = app_path(path, dir);

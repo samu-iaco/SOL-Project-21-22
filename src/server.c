@@ -151,7 +151,6 @@ int main(int argc, char *argv[])
                             break;
                         }
 
-                        printf("op: %d\n",op);
 
                         if(op == OPENFILE){
                             printf("richiesta di apertura di un file\n");
