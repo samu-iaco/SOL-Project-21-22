@@ -1,5 +1,5 @@
 SOCKNAME    =           ./mysock.sk
 
-NWORKER = 374
+NWORKER = 3
 
 CAPACITY = 3992

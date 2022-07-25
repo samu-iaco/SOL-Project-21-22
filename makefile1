@@ -9,7 +9,7 @@ SRCDIR = src
 BINDIR = bin
 HEADDIR = headers
 OBJS = $(OBJDIR)/client.o $(OBJDIR)/api.o $(OBJDIR)/queue.o $(OBJDIR)/utils.o $(OBJDIR)/parse_request.o 
-SERVER_OBJS = $(OBJDIR)/server.o $(OBJDIR)/parse_config.o $(OBJDIR)/utils.o $(OBJDIR)/file.o $(OBJDIR)/storagelist.o  $(OBJDIR)/serverapi.o  
+SERVER_OBJS = $(OBJDIR)/server.o $(OBJDIR)/parse_config.o $(OBJDIR)/utils.o $(OBJDIR)/file.o $(OBJDIR)/storagelist.o  $(OBJDIR)/serverapi.o $(OBJDIR)/workerexecute.o  
 
 $(info objs: $(OBJS))
 $(info server objs: $(SERVER_OBJS))
@@ -62,7 +62,11 @@ $(OBJDIR)/server.o: $(SRCDIR)/server.c $(HEADDIR)/parse_config.h $(HEADDIR)/stor
 
 $(OBJDIR)/serverapi.o: $(SRCDIR)/serverapi.c $(HEADDIR)/files.h $(HEADDIR)/utils.h $(HEADDIR)/serverapi.h
 	@mkdir -p $(OBJDIR)
-	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS)	 
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS)
+
+$(OBJDIR)/workerexecute.o: $(SRCDIR)/workerexecute.c $(HEADDIR)/serverapi.h
+	@mkdir -p $(OBJDIR)
+	$(CC) -c $(INCLUDES) -o $@ $< $(CFLAGS)		 
 
 # $(BINDIR)/%: $(BINDIR)/%.o
 # 	@mkdir -p $(BINDIR)

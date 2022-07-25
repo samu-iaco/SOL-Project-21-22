@@ -9,12 +9,14 @@
 #include <sys/un.h>
 #include <sys/select.h>
 #include <ctype.h>
+#include <pthread.h>
 
 #include <utils.h>
 #include <parse_config.h>
 #include <storagelist.h>
 #include <files.h>
 #include <serverapi.h>
+#include <workerexecute.h>
 
 #define UNIX_PATH_MAX 108
 #define N 1024
@@ -48,7 +50,6 @@ int main(int argc, char *argv[])
         sfd_c, /* socket di I/O con un client */
         fd_num=0, /* max fd attivo */
         fd; /* indice per verificare risultati select */
-    char buf[N]; /* buffer messaggio */
     fd_set set, /* l’insieme  dei file descriptor attivi */
         rdset; /* insieme fd attesi in lettura */
     int nread; /* numero caratteri letti */
@@ -67,6 +68,22 @@ int main(int argc, char *argv[])
     printf("\tsockname: %s\n\tn.worker: %ld\n\tcapacita server (#file): %ld\n", 
            parms.sockname, parms.nworker, parms.maxfile);
 
+    /* GESTIONE DEGLI WORKER */     
+    pthread_t *worker = malloc(sizeof(pthread_t)*parms.nworker);
+    int **pipes = malloc(sizeof(int*) * parms.nworker);
+
+
+    if( (init_worker(worker,pipes,parms.nworker)) == -1 ){
+        fprintf(stderr, "inizializzazione worker: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+
+    for(int i=0; i<parms.nworker; i++){
+        printf("worker %d inizializzato\n",i);
+        
+    }
+    exit(EXIT_SUCCESS);
 
     /* INIZIALIZZAZIONE DELLO STORAGE */
     // storage *file_storage = NULL;
@@ -140,7 +157,7 @@ int main(int argc, char *argv[])
                         FD_SET(sfd_c,&set);
                         if(sfd_c > fd_num) fd_num = sfd_c;
                     }else{
-                        int op,r;
+                        int op;
                         //leggo lunghezza stringa
                         SYSCALL(nread,readn(fd,&op,sizeof(int)),"Error reading lenght string from client",errno);
                         if(nread == 0){

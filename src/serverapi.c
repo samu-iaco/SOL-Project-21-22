@@ -7,7 +7,7 @@ int openfile(int fd){
 
     char* pathname;
 
-    int flags;
+    //int flags;
 
     if( (err = readn(fd, &len_name, sizeof(int))) == -1)
     {
