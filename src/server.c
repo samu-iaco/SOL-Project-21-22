@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 
 
     if( (init_worker(worker,pipes,parms.nworker)) == -1 ){
-        fprintf(stderr, "inizializzazione worker: %s\n", strerror(errno));
+        perror("inizializzazione worker");
         exit(EXIT_FAILURE);
     }
 

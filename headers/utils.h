@@ -45,6 +45,13 @@
         return -1;       \
     }
 
+#define NULL_CHECK_MALLOC(ptr) \
+    if (ptr == NULL)   \
+    {                    \
+        perror("malloc");       \
+        exit(EXIT_FAILURE);       \
+    }
+
 
 
 
@@ -75,6 +82,7 @@ ssize_t readn(int fd, void *ptr, size_t n);
 ssize_t writen(int fd, void *ptr, size_t n);
 
 char* app_path(char* path, const char* filename);
+
 
 
 
