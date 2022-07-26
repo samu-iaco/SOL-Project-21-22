@@ -72,13 +72,13 @@ $(OBJDIR)/workerexecute.o: $(SRCDIR)/workerexecute.c $(HEADDIR)/serverapi.h
 # 	@mkdir -p $(BINDIR)
 # 	$(CC) $(INCLUDES) -o $@ $< $(CFLAGS) 
 
-client: $(OBJS)
+client: $(OBJS) $(LDLIBS)
 	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) -o $(BINDIR)/client $(OBJS)
 
-server: $(SERVER_OBJS)
+server: $(SERVER_OBJS) $(LDLIBS)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) -o $(BINDIR)/server $(SERVER_OBJS)
+	$(CC) $(CFLAGS) -o $(BINDIR)/server $(SERVER_OBJS) $(LDLIBS)
 
 
 

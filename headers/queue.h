@@ -13,7 +13,7 @@
 
 typedef struct requestList_t
 {
-    char *request;
+    int fd;
     struct requestList* next;
 }requestList;
 
@@ -21,3 +21,5 @@ typedef struct requestList_t
 
 requestList* init_queue();
 
+
+void pushRequest(requestList** queue, int fd);

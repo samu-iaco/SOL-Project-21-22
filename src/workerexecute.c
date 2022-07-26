@@ -1,18 +1,29 @@
-#include <workerexecute.h>
 #include <unistd.h>
+#include <pthread.h>
+
+#include <serverapi.h>
+#include <workerexecute.h>
 
 
-int init_pipe(int **pipe){
+pthread_mutex_t mutexQueue = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condQueue = PTHREAD_COND_INITIALIZER;
 
 
-    return 0; 
+/**
+ * @brief gestione delle richieste del client
+ * 
+ * @param arg struttura dati del worker
+ */
+void* startWorker(void* arg){
+    int thid = ((thworker *)arg)->thid;
+    //int *pipe = ((thworker *)arg)->thpipe;
+
+    printf("ciao sono il worker n. %d\n", thid);
+
+    return 0;
 }
 
 int init_worker(pthread_t *worker, int** pipes, int nworker){
-    if(worker == NULL || pipe == NULL){
-        errno = EINVAL;
-        return -1;
-    }
 
     int err;
 
@@ -32,10 +43,14 @@ int init_worker(pthread_t *worker, int** pipes, int nworker){
         NULL_CHECK_MALLOC(workerinfo);
 
         workerinfo->thid = i;
-        
-
+        workerinfo->thpipe = pipes[i];
+        if (pthread_create(&(worker[i]), NULL, &startWorker, (void *)workerinfo) != 0)
+        {
+            perror("Failed to create the thread");
+        }
 
     }
 
     return 0;
 }
+

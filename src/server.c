@@ -68,10 +68,15 @@ int main(int argc, char *argv[])
     printf("\tsockname: %s\n\tn.worker: %ld\n\tcapacita server (#file): %ld\n", 
            parms.sockname, parms.nworker, parms.maxfile);
 
+
+    /* CODA DELLE RICHIESTE */
+    requestList *request = init_queue();
+
     /* GESTIONE DEGLI WORKER */     
     pthread_t *worker = malloc(sizeof(pthread_t)*parms.nworker);
+    NULL_CHECK_MALLOC(worker);
     int **pipes = malloc(sizeof(int*) * parms.nworker);
-
+    NULL_CHECK_MALLOC(pipes);
 
     if( (init_worker(worker,pipes,parms.nworker)) == -1 ){
         perror("inizializzazione worker");
@@ -79,16 +84,11 @@ int main(int argc, char *argv[])
     }
 
 
-    for(int i=0; i<parms.nworker; i++){
-        printf("worker %d inizializzato\n",i);
-        
-    }
-    exit(EXIT_SUCCESS);
 
     /* INIZIALIZZAZIONE DELLO STORAGE */
-    // storage *file_storage = NULL;
-    // //file_storage = init_storage();
-    // printf("storage inizializzato\n");
+    storage *file_storage = NULL;
+    //file_storage = init_storage();
+    printf("storage inizializzato\n");
     // char currpath[4097];
     // char* abspath = app_path(currpath,"./test.txt");
     // //printf("il percorso assoluto del file test è: %s\n",abspath);
@@ -156,29 +156,18 @@ int main(int argc, char *argv[])
                         printf("SERVER: connessione con client stabilita!\n");
                         FD_SET(sfd_c,&set);
                         if(sfd_c > fd_num) fd_num = sfd_c;
-                    }else{
-                        int op;
-                        //leggo lunghezza stringa
-                        SYSCALL(nread,readn(fd,&op,sizeof(int)),"Error reading lenght string from client",errno);
-                        if(nread == 0){
-                            printf("niente piu da leggere\n");
-                            FD_CLR(fd,&set);
-                            fd_num = aggiorna(&set,fd_num);
+                    }else{  /* CLIENT GIA CONNESSO CHE FA UNA RICHIESTA */
+                        // int op;
+                        // //leggo lunghezza stringa
+                        // SYSCALL(nread,readn(fd,&op,sizeof(int)),"Error reading lenght string from client",errno);
+                        // if(nread == 0){
+                        //     printf("niente piu da leggere\n");
+                        //     FD_CLR(fd,&set);
+                        //     fd_num = aggiorna(&set,fd_num);
                             
-                            break;
-                        }
-
-
-                        if(op == OPENFILE){
-                            printf("richiesta di apertura di un file\n");
-                            if( (openfile(fd)) == -1 ){
-                                continue;
-                            }
-                        }
-                        // SYSCALL(r,read(fd,buf,len*sizeof(char)),"Error reading string from client",errno);
-                        // printf("stringa ricevuta: %s\n",buf);
-                        // fflush(stdout);
-
+                        //     break;
+                        // }
+                        pushRequest(&request,fd);
 
 
                     }
